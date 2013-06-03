@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/public/sockets/indexWs.js"></script>
+		<script src="/public/scripts/touchPlugin.js"></script>
+		<script>
+			$('document').ready(function(){
+				$('body').ctouchstart({},function(ev){
+					console.log(ev.touches);
+					$.each(ev.touches,function(key,touch){
+						$('#t'+(key+1)).css("left",touch.clientX-25);
+						$('#t'+(key+1)).css("top",touch.clientY-25);
+					});
+				});
+				$('body').ctouchmove({},function(ev){
+					console.log(ev.touches);
+					$.each(ev.touches,function(key,touch){
+						$('#t'+(key+1)).css("left",touch.clientX-25);
+						$('#t'+(key+1)).css("top",touch.clientY-25);
+					});
+				});
+				$('body').ctouchend({},function(ev){
+					console.log("released a touch");
+				});
+			});
+		</script>
+		<style type="text/css">
+			html,body{height:100%;margin:0px;padding:0px;}
+			.t{width:50px;height:50px;border-radius: 50%;position: absolute; top:0;}
+			#t1{background-color:blue; left:0px;}
+			#t2{background-color:red; left:50px;}
+			#t3{background-color:orange; left:100px;}
+			#t4{background-color:green; left:150px;}
+			#t5{background-color:black; left:200px;}
+		</style>
+	</head>
+	<body>
+		<section id="t1" class="t"></section>
+		<section id="t2" class="t"></section>
+		<section id="t3" class="t"></section>
+		<section id="t4" class="t"></section>
+		<section id="t5" class="t"></section>
+	</body>
+</html>
